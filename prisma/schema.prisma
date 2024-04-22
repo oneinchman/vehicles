@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Equipment {
+  id          String      @id @default(uuid())
+  externalId  Int         @unique
+  name        String
+  vehicle     Vehicle[]
+}
+
+model Vehicle {
+  id          String      @id @default(uuid())
+  name        String
+  active      Boolean
+  driver      String
+  fuelType    String
+  equipments  Equipment[]
+}
